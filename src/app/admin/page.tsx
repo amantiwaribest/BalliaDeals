@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -136,7 +136,8 @@ export default function AdminDashboardPage() {
   const listingToReject = allListings.find(l => l.id === rejectionListingId);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <Suspense fallback={<div>Loading admin dashboard...</div>}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-8">
         <div>
             <h1 className="text-3xl font-bold font-headline tracking-tight flex items-center gap-2">
@@ -299,5 +300,6 @@ export default function AdminDashboardPage() {
       </Dialog>
 
     </div>
+    </Suspense>
   );
 }

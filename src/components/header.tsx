@@ -16,7 +16,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Separator } from './ui/separator';
@@ -135,7 +135,9 @@ const MobileNav = () => {
           </div>
           <Separator />
           <div className="p-4">
-            <UserNav />
+            <Suspense fallback={<div></div>}>
+              <UserNav />
+            </Suspense>
           </div>
         </div>
       </SheetContent>
@@ -157,10 +159,14 @@ const Header = () => {
           <Logo />
         </div>
         <div className="hidden md:flex flex-1 justify-center px-8">
-          <SearchBar />
+          <Suspense fallback={<div></div>}>
+            <SearchBar />
+          </Suspense>
         </div>
         <div className="flex items-center gap-2">
-            <UserNav />
+            <Suspense fallback={<div></div>}>
+              <UserNav />
+            </Suspense>
             <Button asChild className="hidden md:flex bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full">
               <Link href="/listings/new">
                 <PlusIcon className="mr-1 h-5 w-5" />
