@@ -1,0 +1,481 @@
+
+import type { User, Category, Listing } from './types';
+
+const users: User[] = [
+  { id: 'user-1', name: 'Priya', avatarUrl: 'https://i.pravatar.cc/150?u=priya', averageRating: 4.8, reviews: 25, email: 'priya.sharma@example.com', role: 'admin', mobile: '+919876543210', dob: '1990-05-15' },
+  { id: 'user-2', name: 'Raj', avatarUrl: 'https://i.pravatar.cc/150?u=raj', averageRating: 4.5, reviews: 12, email: 'raj.patel@example.com', role: 'user', mobile: '+919123456789', dob: '1992-08-20' },
+  { id: 'user-3', name: 'Anjali', avatarUrl: 'https://i.pravatar.cc/150?u=anjali', averageRating: 4.9, reviews: 42, email: 'anjali.rao@example.com', role: 'user', mobile: '+919988776655', dob: '1995-11-25' },
+];
+
+const categories: Category[] = [
+  { id: 'cat-0', name: 'All Categories' },
+  { id: 'cat-10', name: 'Cars'},
+  { id: 'cat-11', name: 'Mobiles'},
+  { id: 'cat-12', name: 'Bikes'},
+  { id: 'cat-13', name: 'Real Estate'},
+  { id: 'cat-1', name: 'Electronics' },
+  { id: 'cat-14', name: 'Jobs'},
+  { id: 'cat-15', name: 'Services'},
+  { id: 'cat-2', name: 'Furniture' },
+  { id: 'cat-4', name: 'Books' },
+  { id: 'cat-5', name: 'Sports' },
+  { id: 'cat-16', name: 'Others' },
+];
+
+const listings: Omit<Listing, 'seller' | 'category'>[] = [
+  // Existing Listings
+  {
+    id: 'listing-1',
+    title: 'Vintage Leather Armchair',
+    description: 'A beautiful vintage leather armchair with a classic design. Perfect for any living room or study. Shows some signs of wear which add to its character.',
+    price: 28000,
+    categoryId: 'cat-2',
+    sellerId: 'user-1',
+    imageUrl: 'https://picsum.photos/seed/vintage-chair/600/400',
+    imageHint: 'vintage armchair',
+    createdAt: '2024-01-10T10:00:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-2',
+    title: 'Modern Desk Lamp',
+    description: 'Sleek and minimalist desk lamp with adjustable brightness. Provides excellent lighting for work or reading. USB-powered.',
+    price: 3500,
+    categoryId: 'cat-1',
+    sellerId: 'user-2',
+    imageUrl: 'https://picsum.photos/seed/desk-lamp/600/400',
+    imageHint: 'desk lamp',
+    createdAt: '2024-01-11T11:30:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-3',
+    title: 'Set of Ceramic Mugs',
+    description: 'A set of four handcrafted ceramic coffee mugs. Each mug has a unique, rustic glaze. Dishwasher and microwave safe.',
+    price: 2400,
+    categoryId: 'cat-16', // Others
+    sellerId: 'user-3',
+    imageUrl: 'https://picsum.photos/seed/coffee-mugs/600/400',
+    imageHint: 'coffee mugs',
+    createdAt: '2024-01-12T14:00:00Z',
+    status: 'pending',
+  },
+  {
+    id: 'listing-4',
+    title: 'Acoustic Guitar',
+    description: 'A classic dreadnought acoustic guitar. Great for beginners and intermediate players. Comes with a soft case and a pack of new strings.',
+    price: 12000,
+    categoryId: 'cat-16', // Others
+    sellerId: 'user-1',
+    imageUrl: 'https://picsum.photos/seed/acoustic-guitar/600/400',
+    imageHint: 'acoustic guitar',
+    createdAt: '2024-01-13T16:45:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-5',
+    title: 'Retro Bicycle',
+    description: 'A charming retro-style bicycle in light blue. Features a front basket and a comfortable leather seat. Single speed, perfect for city cruising.',
+    price: 17500,
+    categoryId: 'cat-12', // Bikes
+    sellerId: 'user-2',
+    imageUrl: 'https://picsum.photos/seed/retro-bicycle/600/400',
+    imageHint: 'retro bicycle',
+    createdAt: '2024-01-14T09:20:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-6',
+    title: 'Vinyl Record Collection',
+    description: 'A collection of 20 classic rock vinyl records from the 70s and 80s. Includes artists like Led Zeppelin, Pink Floyd, and The Rolling Stones.',
+    price: 14500,
+    categoryId: 'cat-16', // Others
+    sellerId: 'user-3',
+    imageUrl: 'https://picsum.photos/seed/vinyl-records/600/400',
+    imageHint: 'vinyl records',
+    createdAt: '2024-01-15T18:00:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-7',
+    title: 'Vintage Film Camera',
+    description: 'A fully functional 35mm film camera from the 1980s. A classic model known for its sharp lens and reliable mechanics. Comes with a leather case.',
+    price: 9500,
+    categoryId: 'cat-1',
+    sellerId: 'user-1',
+    imageUrl: 'https://picsum.photos/seed/film-camera/600/400',
+    imageHint: 'film camera',
+    createdAt: '2024-01-16T12:10:00Z',
+    status: 'rejected',
+    rejectionReason: 'Image is blurry and item description is too vague.',
+  },
+  {
+    id: 'listing-8',
+    title: 'Designer Handbag',
+    description: 'A stylish and versatile designer leather handbag. In excellent condition, used only a few times. Comes with original dust bag.',
+    price: 36000,
+    categoryId: 'cat-16', // Others
+    sellerId: 'user-2',
+    imageUrl: 'https://picsum.photos/seed/designer-handbag/600/400',
+    imageHint: 'designer handbag',
+    createdAt: '2024-01-17T13:40:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-9',
+    title: 'Gaming Laptop',
+    description: 'High-performance gaming laptop with a fast processor and dedicated graphics card. Can run all modern games at high settings. 15.6-inch 144Hz display.',
+    price: 76000,
+    categoryId: 'cat-1',
+    sellerId: 'user-3',
+    imageUrl: 'https://picsum.photos/seed/gaming-laptop/600/400',
+    imageHint: 'gaming laptop',
+    createdAt: '2024-01-18T20:00:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-10',
+    title: 'Ergonomic Office Chair',
+    description: 'A comfortable ergonomic office chair with lumbar support and adjustable armrests. Perfect for a home office setup. Mesh back for breathability.',
+    price: 14500,
+    categoryId: 'cat-2',
+    sellerId: 'user-1',
+    imageUrl: 'https://picsum.photos/seed/office-chair/600/400',
+    imageHint: 'office chair',
+    createdAt: '2024-01-19T08:00:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-11',
+    title: 'First Edition "Dune"',
+    description: 'A rare first edition hardcover of Frank Herbert\'s classic science fiction novel, "Dune". A true collector\'s item.',
+    price: 95000,
+    categoryId: 'cat-4',
+    sellerId: 'user-3',
+    imageUrl: 'https://picsum.photos/seed/classic-novel/600/400',
+    imageHint: 'classic novel',
+    createdAt: '2024-01-20T17:00:00Z',
+    status: 'pending',
+  },
+  {
+    id: 'listing-12',
+    title: 'Running Shoes',
+    description: 'Lightly used high-performance running shoes, size 10. Excellent cushioning and support. Only worn for about 20 miles.',
+    price: 4800,
+    categoryId: 'cat-5',
+    sellerId: 'user-2',
+    imageUrl: 'https://picsum.photos/seed/running-shoes/600/400',
+    imageHint: 'running shoes',
+    createdAt: '2024-01-21T15:30:00Z',
+    status: 'approved',
+  },
+  // Additional Mock Listings
+  // Cars (cat-10)
+  {
+    id: 'listing-13',
+    title: '2018 Maruti Suzuki Swift',
+    description: 'Reliable and fuel-efficient hatchback. Well-maintained with low mileage. Perfect for city driving.',
+    price: 500000,
+    categoryId: 'cat-10',
+    sellerId: 'user-1',
+    imageUrl: 'https://picsum.photos/seed/maruti-swift/600/400',
+    imageHint: 'hatchback car',
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 10)).toISOString(),
+    status: 'approved',
+  },
+  {
+    id: 'listing-14',
+    title: '2020 Mahindra Thar',
+    description: 'Iconic Indian off-roader. Diesel engine with great torque. A head-turner on and off the road.',
+    price: 1400000,
+    categoryId: 'cat-10',
+    sellerId: 'user-2',
+    imageUrl: 'https://picsum.photos/seed/mahindra-thar/600/400',
+    imageHint: 'off-road suv',
+     createdAt: new Date(new Date().setDate(new Date().getDate() - 15)).toISOString(),
+    status: 'approved',
+  },
+  {
+    id: 'listing-15',
+    title: '2019 Hyundai Creta',
+    description: 'Spacious and versatile SUV. Great for families and road trips. Feature-packed.',
+    price: 1100000,
+    categoryId: 'cat-10',
+    sellerId: 'user-3',
+    imageUrl: 'https://picsum.photos/seed/hyundai-creta/600/400',
+    imageHint: 'compact suv',
+     createdAt: new Date(new Date().setDate(new Date().getDate() - 5)).toISOString(),
+    status: 'approved',
+  },
+  { id: 'listing-16', title: '2017 Toyota Fortuner', description: 'Powerful and reliable SUV. Ready for any terrain.', price: 2200000, categoryId: 'cat-10', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/toyota-fortuner/600/400', imageHint: 'large suv', createdAt: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString(), status: 'approved' },
+  { id: 'listing-17', title: '2021 Tata Nexon EV', description: 'Sleek electric SUV with great range. India\'s best-selling EV.', price: 1500000, categoryId: 'cat-10', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/tata-nexon/600/400', imageHint: 'electric car', createdAt: new Date(new Date().setDate(new Date().getDate() - 2)).toISOString(), status: 'pending' },
+  { id: 'listing-18', title: '2018 Honda City', description: 'The ultimate sedan for comfort and style.', price: 900000, categoryId: 'cat-10', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/honda-city/600/400', imageHint: 'sedan car', createdAt: new Date(new Date().setDate(new Date().getDate() - 12)).toISOString(), status: 'approved' },
+  { id: 'listing-19', title: '2019 Renault Kwid', description: 'Budget-friendly hatchback with SUV styling.', price: 350000, categoryId: 'cat-10', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/renault-kwid/600/400', imageHint: 'small car', createdAt: new Date(new Date().setDate(new Date().getDate() - 7)).toISOString(), status: 'approved' },
+  { id: 'listing-20', title: '2022 Kia Seltos', description: 'Modern design and packed with features.', price: 1300000, categoryId: 'cat-10', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/kia-seltos/600/400', imageHint: 'modern suv', createdAt: new Date(new Date().setDate(new Date().getDate() - 4)).toISOString(), status: 'approved' },
+  { id: 'listing-21', title: '2015 Maruti Suzuki Alto', description: 'India\'s favorite small car. Perfect for first-time buyers.', price: 200000, categoryId: 'cat-10', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/maruti-alto/600/400', imageHint: 'budget car', createdAt: new Date(new Date().setDate(new Date().getDate() - 25)).toISOString(), status: 'approved' },
+  { id: 'listing-22', title: '2020 Tata Harrier', description: 'Stunning design and strong road presence.', price: 1600000, categoryId: 'cat-10', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/tata-harrier/600/400', imageHint: 'stylish suv', createdAt: new Date(new Date().setDate(new Date().getDate() - 18)).toISOString(), status: 'approved' },
+
+  // Mobiles (cat-11)
+  { id: 'listing-23', title: 'iPhone 13 Pro', description: 'Excellent condition, 256GB storage. Indian unit.', price: 90000, categoryId: 'cat-11', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/iphone-13pro/600/400', imageHint: 'smartphone', createdAt: new Date(new Date().setDate(new Date().getDate() - 5)).toISOString(), status: 'approved' },
+  { id: 'listing-24', title: 'Samsung Galaxy S21', description: 'Barely used, 128GB. Comes with original box.', price: 45000, categoryId: 'cat-11', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/galaxy-s21/600/400', imageHint: 'android phone', createdAt: new Date(new Date().setDate(new Date().getDate() - 3)).toISOString(), status: 'approved' },
+  { id: 'listing-25', title: 'Google Pixel 6a', description: 'Amazing camera, pure Android experience. Made for India.', price: 30000, categoryId: 'cat-11', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/pixel-6a/600/400', imageHint: 'google phone', createdAt: new Date(new Date().setDate(new Date().getDate() - 9)).toISOString(), status: 'approved' },
+  { id: 'listing-26', title: 'OnePlus 9', description: 'Fast and smooth performance. Warp charge.', price: 35000, categoryId: 'cat-11', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/oneplus-9/600/400', imageHint: 'fast smartphone', createdAt: new Date(new Date().setDate(new Date().getDate() - 11)).toISOString(), status: 'pending' },
+  { id: 'listing-27', title: 'iPhone 12 Mini', description: 'Compact and powerful. Great for one-handed use.', price: 40000, categoryId: 'cat-11', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/iphone-12mini/600/400', imageHint: 'small phone', createdAt: new Date(new Date().setDate(new Date().getDate() - 14)).toISOString(), status: 'approved' },
+  { id: 'listing-28', title: 'Samsung Galaxy Z Flip 3', description: 'Fun and unique folding phone.', price: 60000, categoryId: 'cat-11', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/z-flip3/600/400', imageHint: 'folding phone', createdAt: new Date(new Date().setDate(new Date().getDate() - 6)).toISOString(), status: 'approved' },
+  { id: 'listing-29', title: 'iPhone SE (2020)', description: 'Affordable iPhone with a home button.', price: 25000, categoryId: 'cat-11', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/iphone-se/600/400', imageHint: 'budget iphone', createdAt: new Date(new Date().setDate(new Date().getDate() - 20)).toISOString(), status: 'approved' },
+  { id: 'listing-30', title: 'Xiaomi Redmi Note 10 Pro', description: 'Budget king with great battery life and 108MP camera.', price: 18000, categoryId: 'cat-11', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/redmi-note10/600/400', imageHint: 'budget android', createdAt: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString(), status: 'approved' },
+  { id: 'listing-31', title: 'Realme GT Master Edition', description: 'Unique suitcase design, great performance.', price: 22000, categoryId: 'cat-11', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/realme-gt/600/400', imageHint: 'stylish phone', createdAt: new Date(new Date().setDate(new Date().getDate() - 8)).toISOString(), status: 'approved' },
+  { id: 'listing-32', title: 'JioPhone Next', description: 'Affordable 4G smartphone for every Indian.', price: 4500, categoryId: 'cat-11', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/jiophone-next/600/400', imageHint: 'basic smartphone', createdAt: new Date(new Date().setDate(new Date().getDate() - 40)).toISOString(), status: 'approved' },
+  
+  // Bikes (cat-12)
+  { id: 'listing-33', title: 'Royal Enfield Classic 350', description: 'The iconic Indian cruiser. Thumps its way into your heart.', price: 180000, categoryId: 'cat-12', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/royal-enfield/600/400', imageHint: 'cruiser bike', createdAt: new Date(new Date().setDate(new Date().getDate() - 3)).toISOString(), status: 'approved' },
+  { id: 'listing-34', title: 'Bajaj Pulsar NS200', description: 'Popular streetfighter bike. Aggressive looks, great performance.', price: 130000, categoryId: 'cat-12', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/pulsar-ns200/600/400', imageHint: 'sports bike', createdAt: new Date(new Date().setDate(new Date().getDate() - 17)).toISOString(), status: 'approved' },
+  { id: 'listing-35', title: 'Hero Splendor Plus', description: 'India\'s most trusted commuter bike. Mileage champion.', price: 70000, categoryId: 'cat-12', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/hero-splendor/600/400', imageHint: 'commuter bike', createdAt: new Date(new Date().setDate(new Date().getDate() - 22)).toISOString(), status: 'approved' },
+  { id: 'listing-36', title: 'TVS Apache RTR 160', description: 'Sporty commuter with race-track DNA.', price: 110000, categoryId: 'cat-12', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/tvs-apache/600/400', imageHint: 'naked bike', createdAt: new Date(new Date().setDate(new Date().getDate() - 6)).toISOString(), status: 'approved' },
+  { id: 'listing-37', title: 'KTM 200 Duke', description: 'The original hooligan. Sharp handling and punchy engine.', price: 180000, categoryId: 'cat-12', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/ktm-duke/600/400', imageHint: 'stunt bike', createdAt: new Date(new Date().setDate(new Date().getDate() - 13)).toISOString(), status: 'approved' },
+  { id: 'listing-38', title: 'Yamaha YZF R15 V4', description: 'Track-focused supersport bike. A mini R1.', price: 175000, categoryId: 'cat-12', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/yamaha-r15/600/400', imageHint: 'racing bike', createdAt: new Date(new Date().setDate(new Date().getDate() - 19)).toISOString(), status: 'approved' },
+  { id: 'listing-39', title: 'Jawa Forty Two', description: 'Classic retro looks with a modern engine.', price: 190000, categoryId: 'cat-12', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/jawa-42/600/400', imageHint: 'retro bike', createdAt: new Date(new Date().setDate(new Date().getDate() - 2)).toISOString(), status: 'pending' },
+  { id: 'listing-40', title: 'Honda Activa 6G', description: 'India\'s favorite scooter. Reliable and convenient.', price: 75000, categoryId: 'cat-12', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/honda-activa/600/400', imageHint: 'scooter', createdAt: new Date(new Date().setDate(new Date().getDate() - 28)).toISOString(), status: 'approved' },
+  { id: 'listing-41', title: 'TVS Jupiter 125', description: 'Spacious and comfortable scooter for the family.', price: 80000, categoryId: 'cat-12', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/tvs-jupiter/600/400', imageHint: 'family scooter', createdAt: new Date(new Date().setDate(new Date().getDate() - 9)).toISOString(), status: 'approved' },
+
+  // Real Estate (cat-13)
+  { id: 'listing-42', title: '2 BHK Apartment in Bandra', description: 'Spacious apartment in a prime Mumbai location.', price: 25000000, categoryId: 'cat-13', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/mumbai-apt/600/400', imageHint: 'city apartment', createdAt: new Date(new Date().setDate(new Date().getDate() - 21)).toISOString(), status: 'approved' },
+  { id: 'listing-43', title: '3 BHK Villa in Gurgaon', description: 'Independent house with a lawn in a gated community.', price: 35000000, categoryId: 'cat-13', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/gurgaon-villa/600/400', imageHint: 'luxury house', createdAt: new Date(new Date().setDate(new Date().getDate() - 4)).toISOString(), status: 'approved' },
+  { id: 'listing-44', title: '1 BHK in South Delhi', description: 'Cozy flat in a well-connected area. Perfect for singles.', price: 9000000, categoryId: 'cat-13', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/delhi-flat/600/400', imageHint: 'small apartment', createdAt: new Date(new Date().setDate(new Date().getDate() - 16)).toISOString(), status: 'approved' },
+  { id: 'listing-45', title: 'Goa Beachside Property', description: 'Your own piece of paradise. Plot with sea view.', price: 15000000, categoryId: 'cat-13', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/goa-beach/600/400', imageHint: 'beach plot', createdAt: new Date(new Date().setDate(new Date().getDate() - 26)).toISOString(), status: 'approved' },
+  { id: 'listing-46', title: 'Manali Mountain Home', description: 'Wooden cottage with a fireplace and Himalayan views.', price: 8000000, categoryId: 'cat-13', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/manali-cabin/600/400', imageHint: 'mountain cabin', createdAt: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString(), status: 'pending' },
+  { id: 'listing-47', title: 'Commercial Shop in Bangalore', description: 'Prime retail location in Koramangala.', price: 50000, categoryId: 'cat-13', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/bangalore-shop/600/400', imageHint: 'retail space', createdAt: new Date(new Date().setDate(new Date().getDate() - 2)).toISOString(), status: 'approved' },
+  { id: 'listing-48', title: 'Agricultural Land near Pune', description: '10 acres of fertile land. Build your farmhouse.', price: 7500000, categoryId: 'cat-13', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/pune-land/600/400', imageHint: 'farm land', createdAt: new Date(new Date().setDate(new Date().getDate() - 11)).toISOString(), status: 'approved' },
+  { id: 'listing-49', title: 'Studio Apartment in Hyderabad', description: 'Affordable and cozy studio in Gachibowli.', price: 3500000, categoryId: 'cat-13', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/hyderabad-apt/600/400', imageHint: 'studio apartment', createdAt: new Date(new Date().setDate(new Date().getDate() - 14)).toISOString(), status: 'approved' },
+  { id: 'listing-50', title: 'Farmhouse in Punjab', description: 'Charming farmhouse with 5 acres of land.', price: 12000000, categoryId: 'cat-13', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/punjab-farm/600/400', imageHint: 'farm house', createdAt: new Date(new Date().setDate(new Date().getDate() - 7)).toISOString(), status: 'approved' },
+  { id: 'listing-51', title: 'Office Space in Chennai', description: 'Furnished office space in T. Nagar.', price: 25000000, categoryId: 'cat-13', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/chennai-office/600/400', imageHint: 'office building', createdAt: new Date(new Date().setDate(new Date().getDate() - 23)).toISOString(), status: 'approved' },
+  
+  // Electronics (cat-1)
+  { id: 'listing-52', title: 'Mi TV 4K 55-inch', description: 'Smart TV with stunning 4K resolution and PatchWall.', price: 45000, categoryId: 'cat-1', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/mi-tv/600/400', imageHint: 'smart tv', createdAt: new Date(new Date().setDate(new Date().getDate() - 24)).toISOString(), status: 'approved' },
+  { id: 'listing-53', title: 'Sony WH-1000XM4 Headphones', description: 'Industry-leading noise-cancelling headphones.', price: 22000, categoryId: 'cat-1', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/sony-headphones/600/400', imageHint: 'headphones', createdAt: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString(), status: 'approved' },
+  { id: 'listing-54', title: 'Canon EOS 1500D', description: 'DSLR camera with 18-55mm lens. Great for beginners.', price: 35000, categoryId: 'cat-1', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/canon-camera/600/400', imageHint: 'digital camera', createdAt: new Date(new Date().setDate(new Date().getDate() - 10)).toISOString(), status: 'approved' },
+  { id: 'listing-55', title: 'Sony PlayStation 5', description: 'Latest generation gaming console. Indian edition.', price: 50000, categoryId: 'cat-1', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/ps5/600/400', imageHint: 'game console', createdAt: new Date(new Date().setDate(new Date().getDate() - 27)).toISOString(), status: 'approved' },
+  { id: 'listing-56', title: 'Amazfit GTR 3 Smartwatch', description: 'Track your fitness and get notifications on your wrist.', price: 12000, categoryId: 'cat-1', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/amazfit-watch/600/400', imageHint: 'smart watch', createdAt: new Date(new Date().setDate(new Date().getDate() - 8)).toISOString(), status: 'approved' },
+  { id: 'listing-57', title: 'boAt Stone 1000 Speaker', description: 'Portable and waterproof. Powerful bass.', price: 3000, categoryId: 'cat-1', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/boat-speaker/600/400', imageHint: 'portable speaker', createdAt: new Date(new Date().setDate(new Date().getDate() - 3)).toISOString(), status: 'approved' },
+  { id: 'listing-58', title: 'DJI Mini 2 Drone', description: 'Capture stunning aerial photos and videos.', price: 40000, categoryId: 'cat-1', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/dji-drone/600/400', imageHint: 'flying drone', createdAt: new Date(new Date().setDate(new Date().getDate() - 12)).toISOString(), status: 'approved' },
+  { id: 'listing-59', title: 'Samsung Galaxy Tab S7', description: '11-inch tablet. Perfect for media and productivity.', price: 45000, categoryId: 'cat-1', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/galaxy-tab/600/400', imageHint: 'tablet device', createdAt: new Date(new Date().setDate(new Date().getDate() - 18)).toISOString(), status: 'approved' },
+  
+  // Jobs (cat-14)
+  {
+    id: 'listing-60',
+    title: 'Frontend Developer',
+    description: 'We are looking for an experienced Frontend Developer proficient in React and Next.js to join our dynamic team in Bangalore. You will be responsible for building responsive and performant user interfaces for our web applications. A strong understanding of modern web technologies and a passion for creating beautiful user experiences is a must. Remote option available for the right candidate.',
+    price: 800000,
+    categoryId: 'cat-14',
+    sellerId: 'user-1',
+    imageUrl: '',
+    imageHint: 'code screen',
+    salaryPeriod: 'year',
+    createdAt: new Date().toISOString(),
+    status: 'approved',
+  },
+  {
+    id: 'listing-61',
+    title: 'Graphic Designer',
+    description: 'Our design agency in Mumbai is seeking a creative Graphic Designer with a strong portfolio in branding and digital media. You will work on a variety of projects, from logo design and marketing materials to social media campaigns. Proficiency in Adobe Creative Suite (Photoshop, Illustrator, InDesign) is required.',
+    price: 600000,
+    categoryId: 'cat-14',
+    sellerId: 'user-2',
+    imageUrl: '',
+    imageHint: 'design portfolio',
+    salaryPeriod: 'year',
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 2)).toISOString(),
+    status: 'approved',
+  },
+  {
+    id: 'listing-62',
+    title: 'Marketing Manager',
+    description: 'A growing brand in Delhi is looking for a strategic Marketing Manager to lead our marketing initiatives. You will be responsible for developing and executing comprehensive marketing campaigns across various channels, managing the marketing budget, and analyzing campaign performance. Proven experience in digital marketing is essential.',
+    price: 1200000,
+    categoryId: 'cat-14',
+    sellerId: 'user-3',
+    imageUrl: '',
+    imageHint: 'business meeting',
+    salaryPeriod: 'year',
+    createdAt: new Date().toISOString(),
+    status: 'approved',
+  },
+  {
+    id: 'listing-63',
+    title: 'Content Writer (English)',
+    description: 'We are hiring a full-time, remote Content Writer to create high-quality, engaging content for our blogs, websites, and social media. The ideal candidate will have excellent writing and editing skills in English, a good understanding of SEO, and the ability to research and write on diverse topics. Please provide writing samples with your application.',
+    price: 500000,
+    categoryId: 'cat-14',
+    sellerId: 'user-1',
+    imageUrl: '',
+    imageHint: 'person writing',
+    salaryPeriod: 'year',
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 3)).toISOString(),
+    status: 'pending',
+  },
+  {
+    id: 'listing-64',
+    title: 'Data Scientist',
+    description: 'Join our team in Hyderabad as a Data Scientist. You will analyze large, complex datasets, apply statistical techniques, and build machine learning models to solve business problems. A Master\'s or PhD in a quantitative field and experience with Python, R, and SQL are required.',
+    price: 1500000,
+    categoryId: 'cat-14',
+    sellerId: 'user-2',
+    imageUrl: '',
+    imageHint: 'data chart',
+    salaryPeriod: 'year',
+    createdAt: new Date().toISOString(),
+    status: 'approved',
+  },
+  {
+    id: 'listing-65',
+    title: 'Product Manager',
+    description: 'Define the future of our fintech product as a Product Manager in Pune. You will own the product roadmap, gather and prioritize requirements from stakeholders, and work closely with engineering and design teams to deliver innovative solutions. Experience in the fintech industry is a plus.',
+    price: 1800000,
+    categoryId: 'cat-14',
+    sellerId: 'user-3',
+    imageUrl: '',
+    imageHint: 'product roadmap',
+    salaryPeriod: 'year',
+    createdAt: '2024-03-10T10:00:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-66',
+    title: 'Customer Support Executive',
+    description: 'We are looking for a patient and empathetic Customer Support Executive to join our team in Chennai. You will be the first point of contact for our customers, resolving their queries via email, phone, and chat. Excellent communication skills and a customer-centric attitude are essential.',
+    price: 350000,
+    categoryId: 'cat-14',
+    sellerId: 'user-1',
+    imageUrl: '',
+    imageHint: 'support agent',
+    salaryPeriod: 'year',
+    createdAt: '2024-03-12T10:00:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-67',
+    title: 'Sales Executive',
+    description: 'This is a fantastic opportunity for a motivated Sales Executive to drive revenue for our SaaS company. You will be responsible for generating leads, nurturing client relationships, and closing deals. This role offers a competitive salary with attractive target-based incentives.',
+    price: 700000,
+    categoryId: 'cat-14',
+    sellerId: 'user-2',
+    imageUrl: '',
+    imageHint: 'sales handshake',
+    salaryPeriod: 'year',
+    createdAt: '2024-03-14T10:00:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-68',
+    title: 'HR Coordinator',
+    description: 'An IT firm is seeking an organized and proactive HR Coordinator. You will assist with the entire employee lifecycle, from recruitment and onboarding to employee relations and offboarding. A degree in Human Resources and prior experience in a similar role is preferred.',
+    price: 550000,
+    categoryId: 'cat-14',
+    sellerId: 'user-3',
+    imageUrl: '',
+    imageHint: 'human resources',
+    salaryPeriod: 'year',
+    createdAt: '2024-03-16T10:00:00Z',
+    status: 'approved',
+  },
+  {
+    id: 'listing-69',
+    title: 'Office Administrator',
+    description: 'We need a reliable Office Administrator to manage our daily office procedures in a corporate setup. Responsibilities include managing supplies, organizing company events, and providing administrative support to our team. Strong organizational and multitasking skills are a must.',
+    price: 480000,
+    categoryId: 'cat-14',
+    sellerId: 'user-1',
+    imageUrl: '',
+    imageHint: 'organized office',
+    salaryPeriod: 'year',
+    createdAt: '2024-03-18T10:00:00Z',
+    status: 'approved',
+  },
+  
+  // Services (cat-15)
+  { id: 'listing-70', title: 'House Cleaning', description: 'Professional house cleaning services. Weekly or bi-weekly.', price: 1500, categoryId: 'cat-15', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/house-cleaning/600/400', imageHint: 'clean house', createdAt: '2024-03-01T10:00:00Z', status: 'approved' },
+  { id: 'listing-71', title: 'Garden Maintenance', description: 'Keep your garden looking great all season.', price: 2000, categoryId: 'cat-15', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/garden-work/600/400', imageHint: 'green garden', createdAt: '2024-03-02T10:00:00Z', status: 'approved' },
+  { id: 'listing-72', title: 'Tutoring (Maths & Science)', description: 'Experienced tutor for CBSE/ICSE students.', price: 800, categoryId: 'cat-15', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/indian-tutoring/600/400', imageHint: 'math equations', createdAt: '2024-03-03T10:00:00Z', status: 'approved' },
+  { id: 'listing-73', title: 'Personal Yoga Trainer', description: 'Achieve your fitness goals with a certified yoga guru.', price: 1000, categoryId: 'cat-15', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/yoga-trainer/600/400', imageHint: 'yoga pose', createdAt: '2024-03-04T10:00:00Z', status: 'approved' },
+  { id: 'listing-74', title: 'Wedding Photography', description: 'Candid and traditional wedding photography.', price: 80000, categoryId: 'cat-15', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/wedding-photo/600/400', imageHint: 'indian wedding', createdAt: '2024-03-05T10:00:00Z', status: 'approved' },
+  { id: 'listing-75', title: 'Carpenter Services', description: 'Custom furniture and home repairs.', price: 1500, categoryId: 'cat-15', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/carpenter/600/400', imageHint: 'using tools', createdAt: '2024-03-06T10:00:00Z', status: 'approved' },
+  { id: 'listing-76', title: 'Tiffin Service', description: 'Home-cooked, healthy meals delivered to your doorstep.', price: 3000, categoryId: 'cat-15', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/tiffin-service/600/400', imageHint: 'indian food', createdAt: '2024-03-07T10:00:00Z', status: 'approved' },
+  { id: 'listing-77', title: 'Mobile Car Wash', description: 'We come to you! Interior and exterior cleaning.', price: 800, categoryId: 'cat-15', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/car-wash/600/400', imageHint: 'clean car', createdAt: '2024-03-08T10:00:00Z', status: 'approved' },
+  { id: 'listing-78', title: 'DJ for Parties', description: 'Bollywood and Punjabi music expert for your events.', price: 15000, categoryId: 'cat-15', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/dj-events/600/400', imageHint: 'dj turntable', createdAt: '2024-03-09T10:00:00Z', status: 'approved' },
+  { id: 'listing-79', title: 'Website Development', description: 'Custom website for small businesses.', price: 30000, categoryId: 'cat-15', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/website-design/600/400', imageHint: 'website code', createdAt: '2024-03-10T10:00:00Z', status: 'approved' },
+  
+  // Furniture (cat-2)
+  { id: 'listing-80', title: 'Sheesham Wood Dining Table', description: 'Solid Sheesham wood dining table with 6 chairs.', price: 45000, categoryId: 'cat-2', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/sheesham-table/600/400', imageHint: 'dining table', createdAt: '2024-02-01T10:00:00Z', status: 'approved' },
+  { id: 'listing-81', title: 'Modern L-Shape Sofa', description: 'Comfortable 5-seater sofa in a neutral grey fabric.', price: 60000, categoryId: 'cat-2', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/l-shape-sofa/600/400', imageHint: 'livingroom sofa', createdAt: '2024-02-02T10:00:00Z', status: 'approved' },
+  { id: 'listing-82', title: 'Metal Bookshelf', description: 'Tall, industrial-style metal bookshelf with 5 shelves.', price: 12000, categoryId: 'cat-2', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/metal-bookshelf/600/400', imageHint: 'bookshelf', createdAt: '2024-02-03T10:00:00Z', status: 'approved' },
+  { id: 'listing-83', title: 'King Size Bed with Storage', description: 'Sturdy wooden bed frame with hydraulic storage.', price: 35000, categoryId: 'cat-2', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/storage-bed/600/400', imageHint: 'bed frame', createdAt: '2024-02-04T10:00:00Z', status: 'approved' },
+  { id: 'listing-84', title: 'Marble Top Coffee Table', description: 'Elegant coffee table with a real marble top.', price: 18000, categoryId: 'cat-2', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/marble-table/600/400', imageHint: 'coffee table', createdAt: '2024-02-05T10:00:00Z', status: 'approved' },
+  { id: 'listing-85', title: 'Wooden Almirah', description: 'Traditional 2-door almirah with a dark wood finish.', price: 20000, categoryId: 'cat-2', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/almirah/600/400', imageHint: 'bedroom wardrobe', createdAt: '2024-02-06T10:00:00Z', status: 'approved' },
+  { id: 'listing-86', title: 'TV Unit', description: 'Media console with storage for your electronics.', price: 15000, categoryId: 'cat-2', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/tv-unit/600/400', imageHint: 'tv stand', createdAt: '2024-02-07T10:00:00Z', status: 'approved' },
+  { id: 'listing-87', title: 'Balcony Swing Chair', description: 'Outdoor swing (jhoola) for your balcony or garden.', price: 8000, categoryId: 'cat-2', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/swing-chair/600/400', imageHint: 'swing chair', createdAt: '2024-02-08T10:00:00Z', status: 'approved' },
+  { id: 'listing-88', title: 'Jaipuri Printed Armchair', description: 'Stylish accent chair with traditional Jaipuri prints.', price: 15000, categoryId: 'cat-2', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/jaipuri-chair/600/400', imageHint: 'ethnic chair', createdAt: '2024-02-09T10:00:00Z', status: 'approved' },
+  
+  // Books (cat-4)
+  { id: 'listing-89', title: 'The Palace of Illusions by Chitra Banerjee Divakaruni', description: 'A retelling of the Mahabharata from Draupadi\'s perspective.', price: 350, categoryId: 'cat-4', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/palace-illusions/600/400', imageHint: 'indian novel', createdAt: '2024-01-15T10:00:00Z', status: 'approved' },
+  { id: 'listing-90', title: 'I Am Malala', description: 'The story of the girl who stood up for education.', price: 400, categoryId: 'cat-4', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/malala-book/600/400', imageHint: 'biography book', createdAt: '2024-01-16T10:00:00Z', status: 'approved' },
+  { id: 'listing-91', title: 'Indian Cookery by Madhur Jaffrey', description: 'A classic cookbook for authentic Indian cuisine.', price: 800, categoryId: 'cat-4', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/indian-cookbook/600/400', imageHint: 'cookbooks', createdAt: '2024-01-17T10:00:00Z', status: 'approved' },
+  { id: 'listing-92', title: 'Harry Potter Series', description: 'Complete 7-book series in paperback.', price: 3000, categoryId: 'cat-4', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/harry-potter/600/400', imageHint: 'magic books', createdAt: '2024-01-18T10:00:00Z', status: 'approved' },
+  { id: 'listing-93', title: 'The God of Small Things by Arundhati Roy', description: 'Booker Prize-winning novel.', price: 300, categoryId: 'cat-4', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/god-small-things/600/400', imageHint: 'literature book', createdAt: '2024-01-19T10:00:00Z', status: 'approved' },
+  { id: 'listing-94', title: 'The Immortals of Meluha by Amish Tripathi', description: 'The first book in the Shiva Trilogy.', price: 250, categoryId: 'cat-4', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/meluha-book/600/400', imageHint: 'mythology book', createdAt: '2024-01-20T10:00:00Z', status: 'approved' },
+  { id: 'listing-95', title: 'A Suitable Boy by Vikram Seth', description: 'One of the longest novels ever published in a single volume.', price: 1200, categoryId: 'cat-4', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/suitable-boy/600/400', imageHint: 'long novel', createdAt: '2024-01-21T10:00:00Z', status: 'approved' },
+  { id: 'listing-96', title: 'Sapiens: A Brief History of Humankind', description: 'By Yuval Noah Harari. International bestseller.', price: 500, categoryId: 'cat-4', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/sapiens-book/600/400', imageHint: 'history book', createdAt: '2024-01-22T10:00:00Z', status: 'approved' },
+  { id: 'listing-97', title: 'R. K. Narayan Collection', description: 'A collection of books by the beloved author from Malgudi.', price: 1500, categoryId: 'cat-4', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/rk-narayan/600/400', imageHint: 'indian author', createdAt: '2024-01-23T10:00:00Z', status: 'approved' },
+  { id: 'listing-98', title: 'Competitive Exam Prep Books', description: 'A bundle of books for UPSC/SSC preparation.', price: 2500, categoryId: 'cat-4', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/exam-books/600/400', imageHint: 'study books', createdAt: '2024-01-24T10:00:00Z', status: 'approved' },
+
+  // Sports (cat-5)
+  { id: 'listing-99', title: 'SG Cricket Kit', description: 'Complete cricket kit for adults. Includes bat, pads, gloves, helmet.', price: 8000, categoryId: 'cat-5', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/cricket-kit/600/400', imageHint: 'cricket gear', createdAt: '2024-01-01T10:00:00Z', status: 'approved' },
+  { id: 'listing-100', title: 'Yoga Mat and Blocks', description: 'High-quality, non-slip yoga mat with two cork blocks.', price: 2500, categoryId: 'cat-5', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/yoga-kit/600/400', imageHint: 'yoga equipment', createdAt: '2024-01-02T10:00:00Z', status: 'approved' },
+  { id: 'listing-101', title: 'Dumbbell Set (Adjustable)', description: 'Adjustable dumbbells, from 5kg to 20kg.', price: 10000, categoryId: 'cat-5', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/adjustable-dumbbells/600/400', imageHint: 'dumbbells', createdAt: '2024-01-03T10:00:00Z', status: 'approved' },
+  { id: 'listing-102', title: 'Yonex Badminton Racket', description: 'Professional quality badminton racket.', price: 4000, categoryId: 'cat-5', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/badminton-racket/600/400', imageHint: 'badminton racket', createdAt: '2024-01-04T10:00:00Z', status: 'approved' },
+  { id: 'listing-103', title: 'Nivia Football', description: 'Official size 5 football. Great for practice.', price: 800, categoryId: 'cat-5', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/football/600/400', imageHint: 'soccer ball', createdAt: '2024-01-05T10:00:00Z', status: 'approved' },
+  { id: 'listing-104', title: 'Oxelo Skateboard', description: 'Complete skateboard, ready to ride. For teens and adults.', price: 3500, categoryId: 'cat-5', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/skateboard-in/600/400', imageHint: 'skateboard', createdAt: '2024-01-06T10:00:00Z', status: 'approved' },
+  { id: 'listing-105', title: 'Camping Tent', description: '4-person camping tent. Waterproof and easy to set up.', price: 5000, categoryId: 'cat-5', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/camping-tent/600/400', imageHint: 'camping tent', createdAt: '2024-01-07T10:00:00Z', status: 'approved' },
+  { id: 'listing-106', title: 'Cosco Carrom Board', description: 'Full-size carrom board with coins and striker.', price: 2000, categoryId: 'cat-5', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/carrom-board/600/400', imageHint: 'board game', createdAt: '2024-01-08T10:00:00Z', status: 'approved' },
+  { id: 'listing-107', title: 'Treadmill for Home', description: 'Foldable treadmill for home workouts.', price: 25000, categoryId: 'cat-5', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/treadmill/600/400', imageHint: 'treadmill', createdAt: '2024-01-09T10:00:00Z', status: 'approved' },
+  
+  // Others (cat-16)
+  { id: 'listing-108', title: 'Madhubani Painting', description: 'Original Madhubani painting on handmade paper.', price: 5000, categoryId: 'cat-16', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/madhubani-art/600/400', imageHint: 'indian painting', createdAt: '2023-12-01T10:00:00Z', status: 'approved' },
+  { id: 'listing-109', title: 'Potted Tulsi Plant', description: 'Holy basil plant in a traditional terracotta pot.', price: 500, categoryId: 'cat-16', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/tulsi-plant/600/400', imageHint: 'holy plant', createdAt: '2023-12-02T10:00:00Z', status: 'approved' },
+  { id: 'listing-110', title: 'Sitar', description: 'A beautiful, handcrafted sitar for classical music enthusiasts.', price: 25000, categoryId: 'cat-16', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/sitar/600/400', imageHint: 'indian instrument', createdAt: '2023-12-03T10:00:00Z', status: 'approved' },
+  { id: 'listing-111', title: 'Designer Saree', description: 'Barely worn designer saree for weddings and parties.', price: 15000, categoryId: 'cat-16', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/designer-saree/600/400', imageHint: 'indian dress', createdAt: '2023-12-04T10:00:00Z', status: 'approved' },
+  { id: 'listing-112', title: 'Pressure Cooker', description: 'Hawkins 5-litre pressure cooker. Good condition.', price: 1200, categoryId: 'cat-16', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/pressure-cooker/600/400', imageHint: 'kitchenware', createdAt: '2023-12-05T10:00:00Z', status: 'approved' },
+  { id: 'listing-113', title: 'Home Tool Kit', description: 'Complete home tool kit with 100+ pieces.', price: 3000, categoryId: 'cat-16', sellerId: 'user-3', imageUrl: 'https://picsum.photos/seed/tool-kit/600/400', imageHint: 'tool kit', createdAt: '2023-12-06T10:00:00Z', status: 'approved' },
+  { id: 'listing-114', title: 'Silver Jhumkas', description: 'A pair of beautiful silver-plated jhumka earrings.', price: 2000, categoryId: 'cat-16', sellerId: 'user-1', imageUrl: 'https://picsum.photos/seed/silver-jhumka/600/400', imageHint: 'earrings', createdAt: '2023-12-07T10:00:00Z', status: 'approved' },
+  { id: 'listing-115', title: 'Usha Sewing Machine', description: 'Beginner-friendly sewing machine. Barely used.', price: 8000, categoryId: 'cat-16', sellerId: 'user-2', imageUrl: 'https://picsum.photos/seed/sewing-machine/600/400', imageHint: 'sewing machine', createdAt: '2023-12-08T10:00:00Z', status: 'approved' },
+];
+
+// Simulate API delay
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+export async function getListings(): Promise<Listing[]> {
+  await delay(100);
+  // Create a deep copy to avoid mutations affecting the original data
+  return JSON.parse(JSON.stringify(listings));
+}
+
+export async function getListingById(id: string): Promise<Listing | undefined> {
+  await delay(100);
+  const listing = listings.find(l => l.id === id);
+  // Create a deep copy to avoid mutations affecting the original data
+  return listing ? JSON.parse(JSON.stringify(listing)) : undefined;
+}
+
+export async function getCategories(): Promise<Category[]> {
+  await delay(50);
+  return categories;
+}
+
+export async function getUsers(): Promise<User[]> {
+  await delay(50);
+  return users;
+}
+
+export async function getUserById(id: string): Promise<User | undefined> {
+  await delay(50);
+  return users.find(u => u.id === id);
+}

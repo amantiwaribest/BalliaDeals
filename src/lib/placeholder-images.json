@@ -1,0 +1,76 @@
+{
+  "placeholderImages": [
+    {
+      "id": "1",
+      "description": "A vintage leather armchair with worn-in charm.",
+      "imageUrl": "https://images.unsplash.com/photo-1660520203142-18dd95ec5a20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx2aW50YWdlJTIwYXJtY2hhaXJ8ZW58MHx8fHwxNzYxOTczOTA3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "vintage armchair"
+    },
+    {
+      "id": "2",
+      "description": "A sleek, modern minimalist desk lamp in black.",
+      "imageUrl": "https://images.unsplash.com/photo-1617363020293-62faac14783d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxkZXNrJTIwbGFtcHxlbnwwfHx8fDE3NjE5NTQ3OTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "desk lamp"
+    },
+    {
+      "id": "3",
+      "description": "A set of four handcrafted ceramic coffee mugs.",
+      "imageUrl": "https://images.unsplash.com/photo-1577594829182-ff8eb109760e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjb2ZmZWUlMjBtdWdzfGVufDB8fHx8MTc2MTk5MzE2OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coffee mugs"
+    },
+    {
+      "id": "4",
+      "description": "A classic acoustic guitar with a rich mahogany finish.",
+      "imageUrl": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhY291c3RpYyUyMGd1aXRhcnxlbnwwfHx8fDE3NjE5Mjg4OTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "acoustic guitar"
+    },
+    {
+      "id": "5",
+      "description": "A light blue retro-style bicycle with a front basket.",
+      "imageUrl": "https://images.unsplash.com/photo-1739783267575-d7ed597e84e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxyZXRybyUyMGJpY3ljbGV8ZW58MHx8fHwxNzYyMDA5MjA0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "retro bicycle"
+    },
+    {
+      "id": "6",
+      "description": "A curated collection of rare 70s rock vinyl records.",
+      "imageUrl": "https://images.unsplash.com/photo-1596633313465-1256feb1c6d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx2aW55bCUyMHJlY29yZHN8ZW58MHx8fHwxNzYxOTM5Njk1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "vinyl records"
+    },
+    {
+      "id": "7",
+      "description": "An old-school 35mm film camera with a leather case.",
+      "imageUrl": "https://images.unsplash.com/photo-1500705077387-65f31ef00c90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxmaWxtJTIwY2FtZXJhfGVufDB8fHx8MTc2MTg4OTYxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "film camera"
+    },
+    {
+      "id": "8",
+      "description": "A stylish designer leather handbag in a neutral tone.",
+      "imageUrl": "https://images.unsplash.com/photo-1761646238279-30de81702a97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkZXNpZ25lciUyMGhhbmRiYWd8ZW58MHx8fHwxNzYyMDA5MjA0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "designer handbag"
+    },
+    {
+      "id": "9",
+      "description": "A high-performance gaming laptop with RGB lighting.",
+      "imageUrl": "https://images.unsplash.com/photo-1658262530868-f7460e2f071f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxnYW1pbmclMjBsYXB0b3B8ZW58MHx8fHwxNzYxOTQ5MzE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gaming laptop"
+    },
+    {
+      "id": "10",
+      "description": "A comfortable and ergonomic office chair.",
+      "imageUrl": "https://images.unsplash.com/photo-1612372606404-0ab33e7187ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxvZmZpY2UlMjBjaGFpcnxlbnwwfHx8fDE3NjE5MzQxMDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "office chair"
+    },
+    {
+      "id": "11",
+      "description": "A pair of trendy sunglasses.",
+      "imageUrl": "https://images.unsplash.com/photo-1508296695146-257a814070b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzdW5nbGFzc2VzfGVufDB8fHx8MTc2MTk3NDMxOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sunglasses"
+    },
+    {
+      "id": "12",
+      "description": "First edition copy of a classic novel.",
+      "imageUrl": "https://images.unsplash.com/photo-1760120482171-d9d5468f75fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjbGFzc2ljJTIwbm92ZWx8ZW58MHx8fHwxNzYxOTg0NjYzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "classic novel"
+    }
+  ]
+}
